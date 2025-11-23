@@ -1,0 +1,116 @@
+benchmark: false
+checkpoint_dir: ./checkpoints
+data:
+  batch_size: 16
+  cache_dir: ./cache
+  data_root: /path/to/LIDC-IDRI
+  elastic_alpha: 100.0
+  elastic_deform: true
+  elastic_sigma: 10.0
+  hard_negative_per_batch: 8
+  noise_std: 0.01
+  num_workers: 8
+  patch_size: !!python/tuple
+  - 64
+  - 64
+  - 64
+  positive_per_batch: 4
+  random_negative_per_batch: 4
+  random_seed: 42
+  rotation_range: 15.0
+  target_spacing: !!python/tuple
+  - 1.0
+  - 1.0
+  - 1.0
+  test_ratio: 0.15
+  train_ratio: 0.7
+  use_augmentation: true
+  val_ratio: 0.15
+  window_level: -300  # Center of -1000 to +400 HU range (thesis spec)
+  window_width: 1400
+deterministic: true
+device: cuda
+evaluation:
+  compute_confusion_matrix: true
+  compute_froc: true
+  compute_roc: true
+  confidence_level: 0.95
+  evaluate_explainability: true
+  num_bootstrap: 1000
+  num_folds: 5
+  size_categories:
+    large: !!python/tuple
+    - 20
+    - 100
+    medium: !!python/tuple
+    - 10
+    - 20
+    small: !!python/tuple
+    - 0
+    - 10
+  xai_validation_samples: 100
+experiment_name: lung_nodule_detection
+explainability:
+  attention_aggregation: mean
+  fusion_weights: !!python/tuple
+  - 0.4
+  - 0.35
+  - 0.25
+  gradcam_target_layer: layer4
+  ig_baseline: zeros
+  ig_steps: 50
+  learned_fusion: true
+  use_attention_viz: true
+  use_gradcam: true
+  use_integrated_gradients: true
+gpu_id: 0
+log_dir: ./logs
+model:
+  classifier_dropout: 0.5
+  classifier_hidden_dim: 256
+  dropout: 0.1
+  fusion_type: hierarchical
+  num_classes: 2
+  resnet_base_channels: 64
+  resnet_depth: 18
+  resnet_in_channels: 1
+  scales: !!python/tuple
+  - 1
+  - 2
+  - 3
+  transformer_depth: 6
+  transformer_dim: 512
+  transformer_heads: 8
+  transformer_mlp_dim: 2048
+  use_multiscale: true
+  use_positional_encoding: true
+  use_transformer: true
+output_dir: ./outputs
+training:
+  adam_betas: !!python/tuple
+  - 0.9
+  - 0.999
+  adam_eps: 1.0e-08
+  class_weights: !!python/tuple
+  - 1.0
+  - 3.0
+  cosine_t0: 10
+  loss_type: weighted_ce
+  lr_cnn: 0.0001
+  lr_transformer: 5.0e-05
+  max_grad_norm: 1.0
+  min_delta: 0.001
+  min_lr: 1.0e-06
+  mining_start_epoch: 20
+  num_epochs: 60
+  optimizer: adamw
+  patience: 15
+  save_best_only: false
+  save_every: 5
+  scheduler: cosine
+  use_amp: true
+  use_hard_mining: true
+  use_xai_loss: true
+  warmup_epochs: 5
+  weight_decay: 0.0001
+  xai_loss_weight: 0.1

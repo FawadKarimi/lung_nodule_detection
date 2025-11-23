@@ -1,0 +1,34 @@
+# Deep Learning Framework
+torch
+torchvision
+torchaudio
+
+# Medical Imaging
+SimpleITK
+nibabel
+pydicom
+
+# Scientific Computing
+numpy
+scipy
+scikit-learn
+scikit-image
+pandas
+
+# Data Augmentation
+batchgenerators
+
+# Visualization
+matplotlib
+seaborn
+tensorboard
+
+# Progress Bars
+tqdm
+
+# Configuration
+pyyaml
+
+# Testing
+pytest
+pytest-cov
